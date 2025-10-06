@@ -25,7 +25,7 @@ Pasos (resumen):
 1. (Opcional) Obtener el List GUID: si conoces el GUID de la lista de comentarios puedes almacenarlo en una variable; si no, usa la acción `Send an HTTP request to SharePoint` para buscar la lista por título.
 
    Ejemplo (si ya conoces el GUID):
-   - Variable `ListId` = `a8cad8ac-e45a-4f20-a525-b3fa4527a7d7` (reemplaza por la tuya)
+   - Variable `ListId` = `a8cad8ac-e45a-4f20-xxxx-b3fa45xxx7a7d7` (reemplaza por la tuya)
 
 2. Acción: `Send an HTTP request to SharePoint`
    - Site Address: `SiteUrl` (usar el parámetro del trigger)
@@ -33,6 +33,9 @@ Pasos (resumen):
    - Uri: `/_api/web/lists(guid'<ListId>')/items(<ItemId>)/Comments?&$select=text,createdDate,author/email,author/name&$expand=author&$orderby=createdDate desc&$top=<Top>`
      - Nota: sustituir `<ListId>` y `<ItemId>` por los valores/variables apropiadas. Para el parámetro `$top` usa la variable `Top` o un valor por defecto (p.ej. 50).
    - Headers: `Accept: application/json;odata=nometadata`
+  
+<img width="610" height="418" alt="Captura de pantalla 2025-10-06 a las 10 47 39" src="https://github.com/user-attachments/assets/99f3c478-dc18-4d06-803b-14f399c3fa14" />
+
 
 3. (Opcional) `Select` / `Parse` — adaptar la respuesta `value` a la forma que quiere el PCF. Mapear campos:
    - `text` -> `text`
@@ -47,25 +50,13 @@ Pasos (resumen):
      - `createdDate` => `coalesce(item()?['createdDate'], item()?['Modified'])` (ajusta según tus campos)
      - `authorName` => `item()?['author']?['name']`
      - `authorEmail` => `item()?['author']?['email']`
+<img width="616" height="606" alt="Captura de pantalla 2025-10-06 a las 10 48 06" src="https://github.com/user-attachments/assets/e6748db5-17f6-4154-b7cb-929a31a1a000" />
 
 4. (Opcional) Filtrar/limpiar: usa `Filter array` para eliminar entradas nulas o `Select` adicional para limpiar strings (p. ej. `replace()` si vienen escapados).
 
 5. `Set variable` o `Compose`: almacena el array resultante en `varResponsed` (u otro nombre)
 
 6. `Respond to a Power App or flow` — devolver `varResponsed` como salida. Esto regresará a Power Apps el JSON con el array de comentarios.
-
-Ejemplo de salida esperada (payload):
-
-```json
-[
-  {
-    "text": "Comentario ejemplo",
-    "createdDate": "2025-10-06T10:00:00Z",
-    "authorName": "Juan Perez",
-    "authorEmail": "juan@empresa.com"
-  }
-]
-```
 
 ---
 
@@ -94,21 +85,11 @@ Pasos (resumen):
   "text": "<Comment>"
 }
 ```
+- <img width="616" height="393" alt="Captura de pantalla 2025-10-06 a las 10 44 37" src="https://github.com/user-attachments/assets/6ff5f65b-c07d-46da-b326-9f84174a4a0b" />
 
 3. `Respond to a Power App or flow` — devuelve la respuesta del POST (por ejemplo el objeto creado) como `Response`.
 
-Ejemplo de respuesta (payload):
 
-```json
-{
-  "id": 12345,
-  "text": "Comentario creado",
-  "createdDate": "2025-10-06T10:05:00Z",
-  "author": { "name": "Usuario Actual", "email": "usuario@empresa.com" }
-}
-```
-
----
 
 ## Wiring con Power Apps y PCF (cómo usar estos Flows desde la app host)
 
@@ -116,21 +97,7 @@ Flujo típico:
 
 1. El componente PCF (CommentTimeline) emite `NewCommentTrigger` y `NewCommentText`.
 2. En Power Apps detectas que `NewCommentTrigger` cambió y ejecutas el Flow `Crear comentarios SMA`, pasando `SiteUrl`, `RecordId` (ItemId) y `NewCommentText`.
-3. El Flow responde a Power Apps con su `payload` (JSON). En Power Apps debes normalizar esa respuesta a texto (p. ej. con `JSON(...)`) y construir el objeto `FlowReturnIn` que espera el PCF:
 
-```json
-{
-  "operationId": "<OperationIdOut>",
-  "error": false,
-  "payload": "<texto JSON devuelto por el Flow>"
-}
-```
-
-- `operationId` debe ser exactamente el valor emitido por el componente PCF (propiedad `OperationIdOut`).
-- `error` = `true` si el Flow falló y quieres que el PCF haga rollback.
-- `payload` es la respuesta (texto JSON) del Flow.
-
-4. Entrega el `FlowReturnIn` al PCF (por ejemplo asignando una variable enlazada a la propiedad `FlowReturnIn` del control). El PCF hará el merge optimista y el rollback si detecta `error: true` o `payload` inválido.
 
 ---
 
@@ -140,9 +107,3 @@ Flujo típico:
 - Si usas el conector de SharePoint, el conector maneja autenticación; evita llamadas HTTP crudas que requieran X-RequestDigest si puedes usar la acción dedicada.
 - Añade manejo de errores en los Flows: envía `error: true` cuando la operación falle o la validación no pase.
 - Prueba los Flows desde Power Apps con datos de ejemplo antes de integrarlos con el PCF para verificar formatos.
-
----
-
-Si quieres, puedo:
-- Generar plantillas de export para importar estos Flows (si me das los exports actuales).
-- Añadir capturas de pantalla paso a paso dentro de esta guía si me subes las imágenes.
