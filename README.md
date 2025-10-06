@@ -59,7 +59,7 @@
 
 1. **Clonar el repositorio:**
 ```bash
-git clone https://github.com/kemador1/CommentTimeline-PCF.git
+git clone https://github.com/kemador1/Componente-PCF-Timeline-de-Comentarios
 cd CommentTimeline-PCF
 ```
 
