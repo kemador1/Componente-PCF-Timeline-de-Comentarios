@@ -1007,6 +1007,8 @@ interface TimelineConfig {
 - [CSS Best Practices](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Organizing)
 - [Performance Best Practices](https://web.dev/performance/)
 
+- Documentación de los Power Automate Flows usados: `docs/FLOWS.md`
+
 ---
 
 ## 🎉 **Conclusión Técnica**

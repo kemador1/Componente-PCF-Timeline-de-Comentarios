@@ -286,6 +286,10 @@ sequenceDiagram
     end
 ```
 
+## 🔁 Flujos (Power Automate)
+
+Ver documentación completa de los Flows usados por el componente: `docs/FLOWS.md`
+
 ### JSON de Comentarios - Estructura Completa
 
 ```json
