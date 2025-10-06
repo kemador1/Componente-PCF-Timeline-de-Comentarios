@@ -418,7 +418,6 @@ npm run lint:fix       # Corregir problemas automáticamente
 ## 📚 Documentación
 
 ### Archivos de Documentación
-- **[Instrucciones de Uso](INSTRUCCIONES-DE-USO.md)** - Guía completa de uso y configuración
 - **[Documentación Técnica](DOCUMENTACION-TECNICA.md)** - Detalles de implementación y arquitectura
 
 ### Características Técnicas Documentadas
@@ -545,7 +544,7 @@ Las contribuciones son **muy bienvenidas**. Por favor:
 ---
 
 **Versión:** 2.1.2  
-**Última actualización:** Enero 2024  
+**Última actualización:** Octubre 2025 
 **Compatibilidad:** Power Apps Canvas, SharePoint Online  
 **Estado:** Production Ready - Enterprise Grade  
 **Mantenimiento:** Activo con soporte completo
