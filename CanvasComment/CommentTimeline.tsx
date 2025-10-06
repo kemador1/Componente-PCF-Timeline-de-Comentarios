@@ -58,16 +58,24 @@ const CommentItem: React.FC<{ comment: SharePointComment; isReply?: boolean }> =
     };
 
     // Función para obtener la foto del usuario usando SharePoint
+    // NOTA: No incluyas valores de tenant en commits públicos. Configure SP_HOST
+    // mediante variables de entorno o una variable global en tiempo de ejecución.
     const getUserPhotoUrl = (email: string) => {
         if (!email) return "";
-        
-        // URL de SharePoint para fotos de perfil
-        // Usa el host raíz del tenant, no el site
-        const SP_HOST = "https://4f41wd.sharepoint.com";
-        
+
+        // Resuelve SP host desde (1) process.env.SP_HOST, (2) window.__SP_HOST, o (3) cadena vacía
+        const envHost = typeof process !== 'undefined' && process.env && (process.env as any).SP_HOST ? (process.env as any).SP_HOST : '';
+        const globalHost = typeof window !== 'undefined' && (window as any).__SP_HOST ? (window as any).__SP_HOST : '';
+        const SP_HOST = envHost || globalHost || '';
+
+        if (!SP_HOST) {
+            // Si no hay host configurado, no intentamos construir una URL externa
+            return "";
+        }
+
         // Tamaños: S=48px, M=72px, L=96px
         // Cambia a M o L si necesitas fotos más grandes
-        return `${SP_HOST}/_layouts/15/userphoto.aspx?size=S&accountname=${encodeURIComponent(email)}`;
+        return `${SP_HOST.replace(/\/$/, '')}/_layouts/15/userphoto.aspx?size=S&accountname=${encodeURIComponent(email)}`;
     };
 
     const formatDate = (dateString: string) => {

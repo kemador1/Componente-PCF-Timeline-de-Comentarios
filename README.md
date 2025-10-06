@@ -2,7 +2,9 @@
 
 ## 📋 Descripción
 
-**CommentTimeline** es un componente personalizado de Power Apps Component Framework (PCF) que proporciona una interfaz moderna, elegante y completamente funcional para mostrar comentarios de SharePoint en formato timeline. Desarrollado específicamente para Power Apps Canvas con integración via Flow a SharePoint y optimizado para rendimiento máximo.
+**CommentTimeline** es un componente personalizado de Power Apps Component Framework (PCF) que proporciona una interfaz para mostrar comentarios de SharePoint en formato timeline. Está diseñado para integrarse con Power Apps Canvas y Power Automate (Flow).
+
+Nota: esta copia de la documentación ha sido revisada y sanitizada para publicación pública. Se han eliminado valores de tenant y ejemplos con datos reales; configura los valores de entorno y tenant durante el despliegue en tu organización.
 
 ## ✨ Características Principales
 
@@ -59,8 +61,11 @@
 
 1. **Clonar el repositorio:**
 ```bash
-git clone https://github.com/kemador1/Componente-PCF-Timeline-de-Comentarios
-cd CommentTimeline-PCF
+# Usa la URL de tu repositorio (HTTPS o SSH). Ejemplo genérico:
+git clone https://github.com/<owner>/<repo>.git
+# o (SSH)
+git clone git@github.com:<owner>/<repo>.git
+cd Componente-PCF-Timeline-de-Comentarios
 ```
 
 2. **Instalar dependencias:**
@@ -88,10 +93,11 @@ npm run lint
 ### Para Power Apps Canvas
 ```bash
 # Deploy al entorno de Power Apps
-pac pcf push --publisher-prefix yb
+# Reemplaza <your-prefix> por el publisher prefix de tu organización
+pac pcf push --publisher-prefix <your-prefix>
 
-# O con configuración específica
-pac pcf push --publisher-prefix yb --env-url https://your-org.crm.dynamics.com
+# Con URL de entorno específica (reemplaza <env-url>)
+pac pcf push --publisher-prefix <your-prefix> --env-url <env-url>
 ```
 
 ### Para Dataverse/Solutions
@@ -100,8 +106,8 @@ pac pcf push --publisher-prefix yb --env-url https://your-org.crm.dynamics.com
 cd Solution/PCF_SMA
 dotnet build
 
-# Importar solución al entorno
-pac solution import --path .\bin\Debug\*.zip --env-url https://your-org.crm.dynamics.com
+# Importar solución al entorno (ajusta la ruta según tu plataforma)
+pac solution import --path ./bin/Debug/*.zip --env-url <env-url>
 ```
 
 ### Para SharePoint Online
@@ -131,18 +137,20 @@ pac solution import --path .\bin\Debug\*.zip --env-url https://your-org.crm.dyna
 
 ### Configuración de Avatares
 
-El componente usa automáticamente el host del tenant de SharePoint:
+El componente puede usar la URL de tu tenant para obtener fotos de usuario. Por seguridad y para facilitar la publicación pública, NO incluimos un valor por defecto en el repositorio.
+
+Ejemplo recomendado (usar variables de entorno o configuración en tiempo de despliegue):
 
 ```typescript
-// En CanvasComment/CommentTimeline.tsx - Línea 58
-const SP_HOST = "https://adif365.sharepoint.com";
+// CanvasComment/CommentTimeline.tsx
+// Reemplaza '<your-tenant>' por tu tenant de SharePoint o configura mediante variables de entorno.
+const SP_HOST = process.env.SP_HOST || '<your-tenant>.sharepoint.com';
 ```
 
-**Para personalizar:**
-1. Editar `CanvasComment/CommentTimeline.tsx`
-2. Cambiar `SP_HOST` a tu tenant
-3. Reconstruir: `npm run build`
-4. Redesplegar: `pac pcf push`
+Instrucciones:
+1. Configura `SP_HOST` localmente o en tu pipeline antes de construir el paquete (no subas valores propietarios al repo).
+2. Reconstruir: `npm run build`
+3. Redesplegar usando `pac pcf push` con tu configuración.
 
 ### Configuración de Límites
 
