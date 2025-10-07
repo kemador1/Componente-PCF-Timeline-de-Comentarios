@@ -226,7 +226,7 @@ Set(
 );
 // ACTUALIZA la variable inmediatamente
 // Patch modifica el campo 'response'
-// ---------- 3) Ejecutar Flow (CORREGIDO) ----------
+// ---------- 3) Ejecutar Flow ----------
 Set(
     _flowRaw,
     Blank()
