@@ -145,7 +145,7 @@ Set(_oldJson, Blank())
 
 Propiedad del PCF: `IsLoading = commentLoading`
 Propiedad del PCF: `CommentsJSON = _commentval.response`
-Propiedad del PCF: 'IsLoading = commentLoading'
+Propiedad del PCF: `IsLoading = commentLoading`
 
 Publicar comentario (propiedad OnChange del PCF)
 
