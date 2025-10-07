@@ -151,7 +151,7 @@ Publicar comentario (propiedad OnChange del PCF)
 
 ```powerfx
 // ======================================================================
-// PUBLICACIÓN DE COMENTARIOS CON UI OPTIMISTA (ARRAY PLANO SIEMPRE)
+// PUBLICACIÓN DE COMENTARIOS CON UI OPTIMISTA
 // ======================================================================
 // ---------- 0) Comentario optimista ----------
 Set(
@@ -235,7 +235,7 @@ Set(
 Set(
     _flowResult,// Variable para capturar resultado completo del Flow
     CrearcomentariosSMA.Run(// Ejecuta el Flow de Power Automate
-        "https://4f41wd.sharepoint.com/sites/SMA_POC",// URL del site
+        "https://you.sharepoint.com/sites/yousite",// URL del site
         selectedRecord.ID,// ID del registro
         CommentTimeline2.NewCommentText // Texto del comentario
     )
