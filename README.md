@@ -524,7 +524,7 @@ Las contribuciones son **muy bienvenidas**. Por favor:
 ## 📞 Soporte
 
 ### Canales de Soporte
-- **Issues:** [GitHub Issues](https://github.com/kemador1/CommentTimeline-PCF/issues)
+- **Issues:** [[GitHub Issues](https://github.com/kemador1/CommentTimeline-PCF/issues](https://github.com/kemador1/Componente-PCF-Timeline-de-Comentarios/issues))
 - **Documentación:** Ver archivos `.md` en el repositorio
 
 ## 🚀 Roadmap
