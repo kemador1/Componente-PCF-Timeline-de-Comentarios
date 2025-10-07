@@ -122,9 +122,9 @@ pac solution import --path ./bin/Debug/*.zip --env-url <env-url>
 
 | Propiedad | Tipo | Descripción | Requerido |
 |-----------|------|-------------|-----------|
-| `CommentsJSON` | Text (Multiple) | JSON de comentarios de SharePoint | No |
+| `CommentsJSON` | Text (Multiple) | JSON de comentarios de SharePoint | **Sí** |
 | `IsLoading` | Boolean (TwoOptions) | Estado de carga del componente | No |
-| `NewCommentText` | Text (SingleLine.TextArea) | Texto del nuevo comentario (salida) | **Sí** |
+| `NewCommentText` | Text (SingleLine.TextArea) | Texto del nuevo comentario (salida) | No|
 
 ### Configuración de Avatares
 
