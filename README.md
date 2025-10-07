@@ -125,15 +125,6 @@ pac solution import --path ./bin/Debug/*.zip --env-url <env-url>
 | `CommentsJSON` | Text (Multiple) | JSON de comentarios de SharePoint | No |
 | `IsLoading` | Boolean (TwoOptions) | Estado de carga del componente | No |
 | `NewCommentText` | Text (SingleLine.TextArea) | Texto del nuevo comentario (salida) | **Sí** |
-| `NewCommentTrigger` | Number (Whole.None) | Trigger para nuevos comentarios (salida) | **Sí** |
-| `SiteUrl` | Text (SingleLine.Text) | URL del sitio SharePoint | No |
-| `RecordId` | Text (SingleLine.Text) | Identificador del registro | No |
-| `FlowReturnIn` | Text (Multiple) | Retorno autocontenido del Flow | No |
-| `OperationIdOut` | Text (SingleLine.Text) | GUID de correlación por intento | No |
-| `RequestPayloadOut` | Text (Multiple) | Payload para el Flow (JSON) | No |
-| `CommentsJSONOut` | Text (Multiple) | Timeline tras optimista/normalización/rollback | No |
-| `IsBusyOut` | Boolean (TwoOptions) | Estado de operación en curso | No |
-| `LastError` | Text (SingleLine.Text) | Mensaje de error | No |
 
 ### Configuración de Avatares
 
