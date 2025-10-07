@@ -119,9 +119,9 @@ If(
     With(
         {
             _resp: 'Button->Obtenerlistas,Inicializarvariable'.Run(
-                "https://4f41wd.sharepoint.com/sites/SMA_POC",
+                "https://you.sharepoint.com/sites/yousite",
                 RecordsGallery1.Selected.ID,
-                500
+                500 //para 500 comentarios
             )
         },
         Set(
